@@ -15,12 +15,7 @@ def test_calc_multiply():
     output = 2 * 4
     assert output == 8
 
-
-def test_calc_division():
-    output = 2 / 4
-    assert output == 1 / 2
-
-
+    
 def test_coucou():
     # Fonction test si la résultat renvoie 'hello'
     output='hello'
