@@ -1,0 +1,14 @@
+name: salutation sur un jour quelconque
+on: workflow_dispatch
+env:
+  DAY_OF_WEEK: Lundi ## Variable d'environnement pour l'ensemble du flux de travail
+jobs:
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Salut ## Variable d'environnement pour la tâche
+    steps:
+      - name: "Dites Salut Desire nous sommes lundi"
+        run: echo "$Greeting $First_Name. Nous sommes $DAY_OF_WEEK!"
+        env:
+          First_Name: Desire ## Variable d'environnement uniquement pour l'étape "Dites Salut Desire nous sommes lundi" de la tâche "greeting_job"
