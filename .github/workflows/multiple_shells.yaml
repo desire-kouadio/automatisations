@@ -1,13 +1,13 @@
 name: Multiple shells commands
+# "Si j'applique un commit dans la branche master, lancer le workflow".
+# exécuter notre workflow en fonction du statut d'une pull request
 on:
   push:
     branches:
       - "master"
   pull_request:
     types: [closed, assigned, opened, reopened]
-
 jobs:
-
   run-shell-command:
     runs-on: ubuntu-latest
     steps:
@@ -16,23 +16,22 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
-
   run-windows-command:
     runs-on: windows-latest
+    # needs est utile dans le cas où vous voulez exécuter des tâches de manière séquentielle
+    # La tâche suivante ne sera exécutée que lorsque la précédente se terminera avec succès
     needs: ["run-shell-command"]
     steps:
       - name: current directory with powershell
         run: Get-Location
-        
       - name: current directory with bash
         run: pwd
         shell: bash
-
       - name: print some default env variables
         run: |
           echo "HOME: ${HOME}"
           echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
-          echo "GITHUB_ACTION: ${GITHUB_ACTION}"
+          echo "GITHUB_ACTION: ${GITHUB_ACTION}" 
           echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
           echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
           echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
