@@ -9,6 +9,7 @@ jobs:
     steps: 
     # uses qui fait appel à un workflow réutilisable déjà existant sur github. 
     # Ensuite nous installons Python sur l'instance avec un autre worflow qui existe déjà.
+    # checkout permet de recopier notre repository sur le serveur distant sur lequel tourne le workflow pour que le job puisse avoir accès à nos fichiers
       - name: Checkout on master
         uses: actions/checkout@v3
 
