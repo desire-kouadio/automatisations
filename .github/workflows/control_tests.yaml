@@ -1,0 +1,32 @@
+name: Pytest and flake8 control Push
+
+on: [push]
+
+jobs:
+  qa: # Id de tâche
+    name: Check tests
+    runs-on: ubuntu-20.04
+    steps: 
+    # uses qui fait appel à un workflow réutilisable déjà existant sur github. 
+    # Ensuite nous installons Python sur l'instance avec un autre worflow qui existe déjà.
+      - name: Checkout on master
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@master
+        with:
+          python-version: "3.x"
+
+      - name: Install pytest and flake8
+        run: |
+          pip install pytest
+          pip install flake8
+
+      - name: Run tests
+        run: |
+          pytest
+
+      # Pour utiliser flake8, vous devez utiliser un workflow déjà existant sur le marketplace github
+      - name: Run flake8
+        uses: py-actions/flake8@v2
+      
